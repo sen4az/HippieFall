@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c7mgny5ykiqv7"]
+
+[ext_resource type="Script" uid="uid://ccnib26yyfxid" path="res://Scripts/touch_input_manager.gd" id="1_bob7n"]
+
+[node name="TouchInputManager" type="Node"]
+script = ExtResource("1_bob7n")
