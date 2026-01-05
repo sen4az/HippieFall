@@ -1,35 +1,64 @@
 extends CharacterBody3D
 
-# Speeds
-@export var max_speed_x: float = 20.0
-@export var max_speed_z: float = 20.0
-@export var fall_speed: float = 8.0
+# Movement Speeds
+@export var max_speed_x: float = 25.0
+@export var max_speed_z: float = 25.0
 
-# Smoothing (lerp)
-@export var lerp_factor: float = 10.0   # larger = faster interpolation (try 4..20)
+# Dynamic Falling Speed
+@export var fall_speed_start: float = 10.0  # Initial falling speed
+@export var fall_speed_max: float = 50.0  # Maximum falling speed
+@export var fall_speed_increment: float = 1  # Speed increment per second
 
-# Upgrades / debug
-@export var speed_multiplier: float = 1.0
-@export var debug: bool = true
+# Smoothing for movement (lerp)
+@export var lerp_factor: float = 10.0  # Controls smoothness; larger = faster transitions
+
+# Touch Controls
+@export var touch_sensitivity: float = 10.0  # Customize drag responsiveness for mobile
+var touch_delta: Vector2 = Vector2.ZERO
+var is_touching: bool = false
+
+# Internal state
+var current_fall_speed: float
+
+func _ready():
+	# Initialize current falling speed
+	current_fall_speed = fall_speed_start
+
+func _input(event):
+	if event is InputEventScreenDrag:
+		# Calculate swipe movement based on touch delta
+		touch_delta = event.relative * touch_sensitivity
+	elif event is InputEventScreenTouch:
+		# Set touch state (pressed/released)
+		is_touching = event.pressed
+		touch_delta = Vector2.ZERO  # Reset delta when touch ends
 
 func _physics_process(delta: float) -> void:
-	# always fall down on Y
-	velocity.y = -fall_speed
+	# Dynamically increase falling speed over time, clamped to the maximum
+	current_fall_speed = clamp(current_fall_speed + fall_speed_increment * delta, fall_speed_start, fall_speed_max)
+	velocity.y = -current_fall_speed  # Apply dynamic falling speed
 
-	# analog-friendly inputs (-1 .. +1)
-	var ix: float = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
-	var iz: float = Input.get_action_strength("move_forward") - Input.get_action_strength("move_back")
+	# Get movement inputs (either touch-based or keyboard-based)
+	var ix: float = 0.0
+	var iz: float = 0.0
+	if is_touching:
+		# Use the drag-based input for mobisdsale devices
+		ix = touch_delta.x / 100
+		iz = touch_delta.y / 100  # Drags downward move positively along Z
+	else:
+		# Keyboard controls for PC
+		ix = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
+		iz = -(Input.get_action_strength("move_forward") - Input.get_action_strength("move_back"))  # Reverse for +Z
 
-	# targets (apply multiplier); forward -> -Z
-	var tx: float = ix * max_speed_x * speed_multiplier
-	var tz: float = -iz * max_speed_z * speed_multiplier
+	# Calculate target velocity (scaled by max speeds)
+	var tx: float = ix * max_speed_x
+	var tz: float = iz * max_speed_z
 
-	# smooth velocity change toward target using lerp (frame-rate scaled)
+	# Smoothly interpolate to target velocity using lerp (frame-rate scaled for consistency)
 	var t: float = clamp(lerp_factor * delta, 0.0, 1.0)
 	velocity.x = lerp(velocity.x, tx, t)
 	velocity.z = lerp(velocity.z, tz, t)
 
-	if debug:
-		print("vel:", velocity, "pos:", global_transform.origin)
-
+	# Apply 
+	print(current_fall_speed)
 	move_and_slide()

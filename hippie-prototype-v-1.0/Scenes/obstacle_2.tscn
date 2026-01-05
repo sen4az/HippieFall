@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://7evj2gp2qan5"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m8qwd"]
+albedo_color = Color(2.0146928, 0, 0.57294494, 1)
+
+[node name="Obstacle2" type="Node3D"]
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
+use_collision = true
+radius = 15.0
+sides = 64
+material = SubResource("StandardMaterial3D_m8qwd")
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="CSGCylinder3D"]
+operation = 2
+radius = 8.0
+sides = 64

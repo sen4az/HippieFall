@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://cwoi4iqiokmpx"]
+
+[ext_resource type="PackedScene" uid="uid://bwoylatocuvkt" path="res://Scenes/vertical_tunnel.tscn" id="1_b7j80"]
+[ext_resource type="PackedScene" uid="uid://vklikhus0d2t" path="res://Scenes/obstacle_1.tscn" id="2_gegx1"]
+[ext_resource type="PackedScene" uid="uid://7evj2gp2qan5" path="res://Scenes/obstacle_2.tscn" id="3_388it"]
+[ext_resource type="PackedScene" uid="uid://bu0gjs5a07cjr" path="res://Scenes/obstacle_3.tscn" id="4_ol26y"]
+
+[node name="SegmentA" type="Node3D"]
+
+[node name="Entrance" type="Node3D" parent="."]
+
+[node name="Exit" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -200, 0)
+
+[node name="VerticalTunnel" parent="." instance=ExtResource("1_b7j80")]
+
+[node name="Obstacles" type="Node3D" parent="."]
+
+[node name="ObstacleHW1" parent="Obstacles" instance=ExtResource("2_gegx1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -23.510965, 0)
+
+[node name="ObstacleHW3" parent="Obstacles" instance=ExtResource("2_gegx1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -109.36256, 0)
+
+[node name="ObstacleHW4" parent="Obstacles" instance=ExtResource("2_gegx1")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, -164.40097, 0)
+
+[node name="ObstacleHW2" parent="Obstacles" instance=ExtResource("2_gegx1")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, -65.12999, 0)
+
+[node name="Obstacle2" parent="Obstacles" instance=ExtResource("3_388it")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -43.114334, 0)
+
+[node name="ObstacleFan1" parent="Obstacles" instance=ExtResource("4_ol26y")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -88.478546, 0)
+
+[node name="ObstacleFan2" parent="Obstacles" instance=ExtResource("4_ol26y")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -129.44891, 0)

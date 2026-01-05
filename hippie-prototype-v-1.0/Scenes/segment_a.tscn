@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://cihbfjcl8d7lh"]
+
+[ext_resource type="PackedScene" uid="uid://bwoylatocuvkt" path="res://Scenes/vertical_tunnel.tscn" id="1_rki0k"]
+[ext_resource type="PackedScene" uid="uid://vklikhus0d2t" path="res://Scenes/obstacle_1.tscn" id="2_s3xl3"]
+[ext_resource type="PackedScene" uid="uid://7evj2gp2qan5" path="res://Scenes/obstacle_2.tscn" id="3_n5dik"]
+[ext_resource type="PackedScene" uid="uid://bu0gjs5a07cjr" path="res://Scenes/obstacle_3.tscn" id="4_12s7s"]
+
+[node name="SegmentA" type="Node3D"]
+
+[node name="Entrance" type="Node3D" parent="."]
+
+[node name="Exit" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -200, 0)
+
+[node name="VerticalTunnel" parent="." instance=ExtResource("1_rki0k")]
+
+[node name="Obstacles" type="Node3D" parent="."]
+
+[node name="Obstacle1" parent="Obstacles" instance=ExtResource("2_s3xl3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -26.64989, 0)
+
+[node name="Obstacle2" parent="Obstacles" instance=ExtResource("3_n5dik")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -97.92102, 0)
+
+[node name="Obstacle3" parent="Obstacles" instance=ExtResource("4_12s7s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -174.26732, 0)

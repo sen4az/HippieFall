@@ -1,34 +1,41 @@
 extends Camera3D
 
-# Smoothing parameters
-@export var smoothing_speed: float = 1.0 # Higher value = tighter follow
-@export var offset: Vector3 = Vector3(0, 3.3, -0.5) # Default offset to position camera above and behind the player
+# Parameters for camera behavior
+@export var smoothing_speed: float = 1.0 # Moderate smoothing for balance
+@export var offset: Vector3 = Vector3(0, 3.5, -0.9) # Camera position above and slightly behind the player
+@export var catch_up_threshold: float = 1.0 # Distance threshold for faster correction
+@export var catch_up_factor: float = 0.1 # Catch-up strength for aggressive following
 
-# Tunnel boundary limits (adjust these to match your tunnel dimensions)
-#@export var bounds_min: Vector3 = Vector3(-5, 0, -20)  # Example: lower limit
-#@export var bounds_max: Vector3 = Vector3(5, 10, 20)   # Example: upper limit
+@export var player: NodePath # Reference to the player node (set in Inspector)
 
-# Reference to the player (export helps assigning in the Inspector)
-@export var player: NodePath
-
-# Internal cached position for stability
+# Internal cached position for camera movement
 var target_position: Vector3
 
 func _ready():
-	if player == null:
-		print("Error: Player node must be assigned!")
+	# Validate the player node
+	if player == null or not has_node(player):
+		print("Error: Player node not assigned!")
+		set_process(false)
 		return
-
-	# Initialize tracking player position
-	target_position = get_node(player).global_transform.origin
+	
+	# Initialize target position
+	var player_node = get_node(player)
+	target_position = player_node.global_transform.origin
 
 func _process(delta):
+	# Retrieve the player node
 	var player_node = get_node(player)
 	if not player_node:
+		print("Warning: Player node not found!")
 		return
 
-	# Determine target position in 3D space
-	target_position = player_node.global_transform.origin + offset
+	# Calculate the desired target position based on the player's position and offset
+	var desired_position = player_node.global_transform.origin + offset
 
-	# Optional lag smoothing using `lerp` (linear interpolation between current and target positions)
-	global_transform.origin = global_transform.origin.lerp(target_position, delta * smoothing_speed)
+	# Gradually smooth toward the desired position
+	var movement_smoothness: float = 1.0 - exp(-smoothing_speed * delta)
+	global_transform.origin = global_transform.origin.lerp(desired_position, movement_smoothness)
+
+	# Aggressive catch-up logic if the camera lags too far behind
+	if global_transform.origin.distance_to(desired_position) > catch_up_threshold:
+		global_transform.origin = global_transform.origin.lerp(desired_position, catch_up_factor)

@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://bu0gjs5a07cjr"]
+
+[ext_resource type="Script" uid="uid://cqir3721ki7y" path="res://Scripts/animatable_body_3d.gd" id="1_sc8no"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sc8no"]
+albedo_color = Color(0.777, 1.259, 0.464, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_sc8no"]
+size = Vector3(20, 1, 1)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_53i0h"]
+data = PackedVector3Array(-10, 0.5, 0.5, 10, 0.5, 0.5, -10, -0.5, 0.5, 10, 0.5, 0.5, 10, -0.5, 0.5, -10, -0.5, 0.5, 10, 0.5, -0.5, -10, 0.5, -0.5, 10, -0.5, -0.5, -10, 0.5, -0.5, -10, -0.5, -0.5, 10, -0.5, -0.5, 10, 0.5, 0.5, 10, 0.5, -0.5, 10, -0.5, 0.5, 10, 0.5, -0.5, 10, -0.5, -0.5, 10, -0.5, 0.5, -10, 0.5, -0.5, -10, 0.5, 0.5, -10, -0.5, -0.5, -10, 0.5, 0.5, -10, -0.5, 0.5, -10, -0.5, -0.5, 10, 0.5, 0.5, -10, 0.5, 0.5, 10, 0.5, -0.5, -10, 0.5, 0.5, -10, 0.5, -0.5, 10, 0.5, -0.5, -10, -0.5, 0.5, 10, -0.5, 0.5, -10, -0.5, -0.5, 10, -0.5, 0.5, 10, -0.5, -0.5, -10, -0.5, -0.5)
+
+[node name="Obstacle3" type="Node3D"]
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
+use_collision = true
+radius = 15.0
+sides = 64
+material = SubResource("StandardMaterial3D_sc8no")
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="CSGCylinder3D"]
+operation = 2
+radius = 12.4
+sides = 64
+
+[node name="Obstacle3Body" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.52394867, 0)
+script = ExtResource("1_sc8no")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Obstacle3Body"]
+mesh = SubResource("BoxMesh_sc8no")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Obstacle3Body"]
+shape = SubResource("ConcavePolygonShape3D_53i0h")

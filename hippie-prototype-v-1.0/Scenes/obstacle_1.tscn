@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://vklikhus0d2t"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x84vb"]
+albedo_color = Color(8.235, 0, 0, 1)
+
+[node name="Obstacle1" type="Node3D"]
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
+use_collision = true
+radius = 15.0
+sides = 64
+material = SubResource("StandardMaterial3D_x84vb")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCylinder3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.138814, 0, 7.4484863)
+operation = 2
+size = Vector3(32.861366, 4.1, 15.896973)
