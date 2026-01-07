@@ -3,7 +3,7 @@
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m8qwd"]
 albedo_color = Color(2.0146928, 0, 0.57294494, 1)
 
-[node name="Obstacle2" type="Node3D"]
+[node name="Obstacle2" type="Node3D" groups=["obstacle"]]
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
 use_collision = true
