@@ -9,13 +9,13 @@ var _ui: Node
 func _ready() -> void:
 	_player = get_node_or_null(player_path)
 	_ui = get_node_or_null(game_over_ui_path)
+	
 	if _player == null:
 		push_error("GameOverManager: player_path invalid.")
 		return
 	if _ui == null:
 		push_error("GameOverManager: game_over_ui_path invalid.")
 		return
-
 
 	if _player.has_signal("died"):
 		_player.connect("died", Callable(self, "_on_player_died"))
@@ -25,11 +25,16 @@ func _ready() -> void:
 	if _ui.has_method("hide_ui"):
 		_ui.call("hide_ui")
 
+	if _ui.has_signal("restart_requested"):
+		_ui.connect("restart_requested", Callable(self, "_on_restart_requested"))
+	else:
+		push_error("GameOverManager: GameOverUI missing restart_requested signal")
+
 func _on_player_died() -> void:
 	get_tree().paused = true
 	if _ui.has_method("show_ui"):
 		_ui.call("show_ui")
-		
+
 func _on_restart_requested():
 	get_tree().paused = false
 	get_tree().reload_current_scene()
