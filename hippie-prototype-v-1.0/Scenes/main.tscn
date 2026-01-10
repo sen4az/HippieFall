@@ -1,6 +1,5 @@
 [gd_scene load_steps=12 format=3 uid="uid://bxn1pt420cvdj"]
 
-[ext_resource type="PackedScene" uid="uid://of807v2fkrqg" path="res://Scenes/game_over_manager.tscn" id="1_6bp64"]
 [ext_resource type="PackedScene" uid="uid://dfslbm27rg5o1" path="res://Scenes/game_over_ui.tscn" id="1_344ge"]
 [ext_resource type="PackedScene" uid="uid://cwcj7krksdyrq" path="res://Scenes/player.tscn" id="1_jjgbg"]
 [ext_resource type="Script" uid="uid://clu85wxsubuos" path="res://Scripts/endless_tunnel.gd" id="2_kry3j"]
@@ -8,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bh70xia7ag3nu" path="res://Scenes/segment_b.tscn" id="4_6bp64"]
 [ext_resource type="PackedScene" uid="uid://cwoi4iqiokmpx" path="res://Scenes/segment_c.tscn" id="5_344ge"]
 [ext_resource type="PackedScene" uid="uid://bwoylatocuvkt" path="res://Scenes/vertical_tunnel.tscn" id="6_21xkr"]
+[ext_resource type="PackedScene" uid="uid://of807v2fkrqg" path="res://Scenes/game_over_manager.tscn" id="8_344ge"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_jjgbg"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -46,6 +46,4 @@ max_recycles_per_frame = 3
 
 [node name="GameOverUI" parent="." instance=ExtResource("1_344ge")]
 
-[node name="GameOverManager" parent="." instance=ExtResource("1_6bp64")]
-player_path = NodePath("../Player")
-game_over_ui_path = NodePath("../GameOverUI")
+[node name="GameOverManager" parent="." instance=ExtResource("8_344ge")]

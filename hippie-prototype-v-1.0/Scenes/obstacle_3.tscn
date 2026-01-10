@@ -15,6 +15,8 @@ data = PackedVector3Array(-10, 0.5, 0.5, 10, 0.5, 0.5, -10, -0.5, 0.5, 10, 0.5, 
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
 use_collision = true
+collision_layer = 2
+collision_mask = 0
 radius = 15.0
 sides = 64
 material = SubResource("StandardMaterial3D_sc8no")
@@ -26,9 +28,12 @@ sides = 64
 
 [node name="Obstacle3Body" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.52394867, 0)
+collision_layer = 2
+collision_mask = 0
 script = ExtResource("1_sc8no")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Obstacle3Body"]
+layers = 2
 mesh = SubResource("BoxMesh_sc8no")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Obstacle3Body"]

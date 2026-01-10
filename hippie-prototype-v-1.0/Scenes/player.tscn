@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://cwcj7krksdyrq"]
+[gd_scene load_steps=6 format=3 uid="uid://cwcj7krksdyrq"]
 
 [ext_resource type="Script" uid="uid://dnm6o3570nn7o" path="res://Scripts/player.gd" id="1_v0iea"]
 [ext_resource type="Script" uid="uid://b60wk7nh0dxj3" path="res://Scripts/camera_3d.gd" id="2_cvnsp"]
@@ -7,7 +7,10 @@
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_cvnsp"]
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6t5aa"]
+
 [node name="Player" type="CharacterBody3D"]
+collision_mask = 3
 script = ExtResource("1_v0iea")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
@@ -25,3 +28,14 @@ script = ExtResource("2_cvnsp")
 catch_up_threshold = 3.0
 catch_up_factor = 0.01
 player = NodePath("..")
+
+[node name="HitBox" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0534862, 0)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitBox"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0.5, 0)
+shape = SubResource("CapsuleShape3D_6t5aa")
+
+[connection signal="area_entered" from="HitBox" to="." method="_on_hit_box_area_entered"]
