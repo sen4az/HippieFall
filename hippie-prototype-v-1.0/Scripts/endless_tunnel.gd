@@ -3,7 +3,7 @@ extends Node3D
 @export var player_path: NodePath = NodePath("../Player")
 @export var segments_root_path: NodePath = NodePath("../Segments")
 @export var segment_variants: Array[PackedScene] = []
-
+@export var collectibles_manager_path: NodePath
 
 @export var active_segments: int = 4
 @export var segment_length: float = 200.0
@@ -19,10 +19,13 @@ var _segments: Array[Node3D] = []
 var _rng: RandomNumberGenerator = RandomNumberGenerator.new()
 var _dir: Vector3 = Vector3(0, -1, 0)
 var _spawn_basis: Basis = Basis.IDENTITY
+var _collectibles_manager: Node = null
 
 func _ready() -> void:
 	_player = get_node_or_null(player_path) as Node3D
 	_root = get_node_or_null(segments_root_path) as Node
+	_collectibles_manager = get_node_or_null(collectibles_manager_path)
+
 	if _player == null:
 		push_error("SimpleNumericTunnelSpawner: player_path invalid.")
 		return
@@ -56,6 +59,11 @@ func _ready() -> void:
 		seg.global_transform = Transform3D(_spawn_basis, pos_i)
 		if enable_debug_logs:
 			print("init seg ", i, " at ", pos_i)
+		_spawn_collectibles(seg)
+
+func _spawn_collectibles(seg: Node3D) -> void:
+	if _collectibles_manager and _collectibles_manager.has_method("spawn_on_segment"):
+		_collectibles_manager.call("spawn_on_segment", seg, _spawn_basis)
 
 func _physics_process(delta: float) -> void:
 	if _segments.is_empty():
@@ -85,6 +93,7 @@ func _recycle_move_front_to_tail() -> void:
 	front.global_transform = Transform3D(_spawn_basis, new_pos)
 	_segments.append(front)
 	_reset_segment_recursive(front)
+	_spawn_collectibles(front)
 
 	if enable_debug_logs:
 		print("recycle -> moved front to ", new_pos)

@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://b32ufs5idpuev"]
+
+[ext_resource type="Script" uid="uid://o75p70frfrp1" path="res://Scripts/collectibles_manager.gd" id="1_hee68"]
+[ext_resource type="PackedScene" uid="uid://blff50uau15xk" path="res://Scenes/coin.tscn" id="2_mtthq"]
+
+[node name="CollectiblesManager" type="Node3D"]
+script = ExtResource("1_hee68")
+collectibles = Array[PackedScene]([ExtResource("2_mtthq")])

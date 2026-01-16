@@ -31,9 +31,14 @@ func _ready() -> void:
 		push_error("GameOverManager: GameOverUI missing restart_requested signal")
 
 func _on_player_died() -> void:
+	_stop_collectibles()           # <-- stop coin motion
 	get_tree().paused = true
 	if _ui.has_method("show_ui"):
 		_ui.call("show_ui")
+
+func _stop_collectibles() -> void:
+	for c in get_tree().get_nodes_in_group("collectible"):
+		c.call_deferred("stop_motion")
 
 func _on_restart_requested():
 	get_tree().paused = false

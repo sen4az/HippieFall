@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://cler8bgg0h658"]
+
+[ext_resource type="Script" uid="uid://1deyol3dimo" path="res://Scripts/obstacle_4.gd" id="1_4gobw"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m8qwd"]
+albedo_color = Color(2.0146928, 0, 0.57294494, 1)
+
+[node name="Obstacle4" type="Node3D" groups=["obstacle"]]
+script = ExtResource("1_4gobw")
+hole_node_path = NodePath("CSGCylinder3D/MovingHole")
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
+use_collision = true
+collision_layer = 2
+collision_mask = 0
+radius = 20.0
+sides = 64
+material = SubResource("StandardMaterial3D_m8qwd")
+
+[node name="MovingHole" type="CSGCylinder3D" parent="CSGCylinder3D"]
+operation = 2
+radius = 10.0
+sides = 64

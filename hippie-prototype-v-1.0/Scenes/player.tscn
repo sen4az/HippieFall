@@ -4,8 +4,12 @@
 [ext_resource type="Script" uid="uid://b60wk7nh0dxj3" path="res://Scripts/camera_3d.gd" id="2_cvnsp"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_v0iea"]
+radius = 0.4
+height = 1.8
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_cvnsp"]
+radius = 0.4
+height = 1.8
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6t5aa"]
 
@@ -23,7 +27,7 @@ shape = SubResource("CapsuleShape3D_cvnsp")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 4.533205, -0.8194563)
-fov = 90.0
+fov = 100.0
 script = ExtResource("2_cvnsp")
 catch_up_threshold = 3.0
 catch_up_factor = 0.01

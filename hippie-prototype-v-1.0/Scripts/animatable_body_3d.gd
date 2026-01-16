@@ -1,6 +1,6 @@
 extends StaticBody3D
 
-@export var rpm: float = 25.0
+@export var rpm: float = 20.0
 @export var axis: Vector3 = Vector3.UP
 
 var _base_basis: Basis = Basis.IDENTITY

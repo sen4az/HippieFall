@@ -9,11 +9,11 @@ albedo_color = Color(8.235, 0, 0, 1)
 use_collision = true
 collision_layer = 2
 collision_mask = 0
-radius = 15.0
+radius = 20.0
 sides = 64
 material = SubResource("StandardMaterial3D_x84vb")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="CSGCylinder3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.138814, 0, 7.4484863)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.22656345, 0, 10.075799)
 operation = 2
-size = Vector3(32.861366, 4.1, 15.896973)
+size = Vector3(40.591755, 4.1, 21.151625)

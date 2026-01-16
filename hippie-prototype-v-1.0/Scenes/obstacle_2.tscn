@@ -9,11 +9,11 @@ albedo_color = Color(2.0146928, 0, 0.57294494, 1)
 use_collision = true
 collision_layer = 2
 collision_mask = 0
-radius = 15.0
+radius = 20.0
 sides = 64
 material = SubResource("StandardMaterial3D_m8qwd")
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="CSGCylinder3D"]
 operation = 2
-radius = 8.0
+radius = 10.0
 sides = 64

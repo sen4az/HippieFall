@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bxn1pt420cvdj"]
+[gd_scene load_steps=13 format=3 uid="uid://bxn1pt420cvdj"]
 
 [ext_resource type="PackedScene" uid="uid://dfslbm27rg5o1" path="res://Scenes/game_over_ui.tscn" id="1_344ge"]
 [ext_resource type="PackedScene" uid="uid://cwcj7krksdyrq" path="res://Scenes/player.tscn" id="1_jjgbg"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bh70xia7ag3nu" path="res://Scenes/segment_b.tscn" id="4_6bp64"]
 [ext_resource type="PackedScene" uid="uid://cwoi4iqiokmpx" path="res://Scenes/segment_c.tscn" id="5_344ge"]
 [ext_resource type="PackedScene" uid="uid://bwoylatocuvkt" path="res://Scenes/vertical_tunnel.tscn" id="6_21xkr"]
+[ext_resource type="PackedScene" uid="uid://b32ufs5idpuev" path="res://Scenes/collectibles_manager.tscn" id="6_hptm8"]
 [ext_resource type="PackedScene" uid="uid://of807v2fkrqg" path="res://Scenes/game_over_manager.tscn" id="8_344ge"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_jjgbg"]
@@ -20,8 +21,10 @@ sky_material = SubResource("ProceduralSkyMaterial_jjgbg")
 background_mode = 2
 sky = SubResource("Sky_bo1nx")
 tonemap_mode = 2
-volumetric_fog_emission = Color(0, 0.73333335, 0, 1)
-volumetric_fog_length = 145.92
+volumetric_fog_enabled = true
+volumetric_fog_albedo = Color(0.69240254, 0.6891974, 0, 1)
+volumetric_fog_emission = Color(0.9196915, 0.6289817, 0.15189973, 1)
+volumetric_fog_length = 24.01
 
 [node name="Main" type="Node3D"]
 
@@ -31,7 +34,8 @@ volumetric_fog_length = 145.92
 environment = SubResource("Environment_8gbba")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.07783279, -0.8633983, 0.49848315, 2.7805946e-08, 0.49999994, 0.86602545, -0.9969665, -0.067405164, 0.038916364, 0, 3.0806665, 3.3213968)
+transform = Transform3D(-0.8590908, -0.37688726, -0.34629303, -0.4913687, 0.41796127, 0.7641107, -0.14324676, 0.82659805, -0.5442573, 0, 0, 0)
+light_energy = 1.35
 shadow_enabled = true
 
 [node name="Segments" type="Node3D" parent="."]
@@ -39,8 +43,9 @@ shadow_enabled = true
 [node name="EndlessTunnel" type="Node3D" parent="."]
 script = ExtResource("2_kry3j")
 segment_variants = Array[PackedScene]([ExtResource("3_21xkr"), ExtResource("4_6bp64"), ExtResource("5_344ge")])
-active_segments = 3
-max_recycles_per_frame = 3
+collectibles_manager_path = NodePath("CollectiblesManager")
+
+[node name="CollectiblesManager" parent="EndlessTunnel" instance=ExtResource("6_hptm8")]
 
 [node name="VerticalTunnel" parent="." instance=ExtResource("6_21xkr")]
 
