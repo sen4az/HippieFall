@@ -1,10 +1,10 @@
 extends CharacterBody3D
 
-@export var max_speed_x: float = 25.0
-@export var max_speed_z: float = 25.0
+@export var max_speed_x: float = 30.0
+@export var max_speed_z: float = 30.0
 @export var fall_speed_start: float = 20.0
-@export var fall_speed_max: float = 75.0
-@export var fall_speed_increment: float = 1.0
+@export var fall_speed_max: float = 65.0
+@export var fall_speed_increment: float = .7
 @export var lerp_factor: float = 10.0
 @export var touch_sensitivity: float = 10.0
 

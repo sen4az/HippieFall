@@ -30,12 +30,49 @@ size_flags_vertical = 4
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
+theme_override_constants/separation = 45
+alignment = 1
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+[node name="Control" type="Control" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 125)
 layout_mode = 2
 size_flags_horizontal = 4
+size_flags_vertical = 6
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -151.0
+offset_right = 151.0
+offset_bottom = 76.0
+grow_horizontal = 2
+size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 55
-text = "Game Over"
+text = "Trip is Over"
+
+[node name="StatsBox" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 8
+
+[node name="DepthStats" type="Label" parent="MarginContainer/VBoxContainer/StatsBox"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 35
+text = "Depth Record : 0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CoinsStats" type="Label" parent="MarginContainer/VBoxContainer/StatsBox"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 35
+text = "Coins Collected : 0"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="RestartButton" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2

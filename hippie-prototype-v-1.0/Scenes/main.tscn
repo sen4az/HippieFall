@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bxn1pt420cvdj"]
+[gd_scene load_steps=14 format=3 uid="uid://bxn1pt420cvdj"]
 
 [ext_resource type="PackedScene" uid="uid://dfslbm27rg5o1" path="res://Scenes/game_over_ui.tscn" id="1_344ge"]
 [ext_resource type="PackedScene" uid="uid://cwcj7krksdyrq" path="res://Scenes/player.tscn" id="1_jjgbg"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://bwoylatocuvkt" path="res://Scenes/vertical_tunnel.tscn" id="6_21xkr"]
 [ext_resource type="PackedScene" uid="uid://b32ufs5idpuev" path="res://Scenes/collectibles_manager.tscn" id="6_hptm8"]
 [ext_resource type="PackedScene" uid="uid://of807v2fkrqg" path="res://Scenes/game_over_manager.tscn" id="8_344ge"]
+[ext_resource type="PackedScene" uid="uid://c8wmaycqy8840" path="res://Scenes/hud.tscn" id="9_hptm8"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_jjgbg"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -50,5 +51,8 @@ collectibles_manager_path = NodePath("CollectiblesManager")
 [node name="VerticalTunnel" parent="." instance=ExtResource("6_21xkr")]
 
 [node name="GameOverUI" parent="." instance=ExtResource("1_344ge")]
+
+[node name="HUD" parent="." instance=ExtResource("9_hptm8")]
+player_path = NodePath("../Player")
 
 [node name="GameOverManager" parent="." instance=ExtResource("8_344ge")]

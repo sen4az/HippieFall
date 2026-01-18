@@ -1,0 +1,38 @@
+[gd_scene load_steps=2 format=3 uid="uid://c8wmaycqy8840"]
+
+[ext_resource type="Script" uid="uid://ytc2uqwl05tn" path="res://Scripts/hud.gd" id="1_e0onf"]
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_e0onf")
+depth_label_path = NodePath("Control/MarginContainer/HBoxContainer/Depth")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -100.5
+offset_right = 100.5
+offset_bottom = 95.0
+grow_horizontal = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/MarginContainer"]
+layout_mode = 2
+
+[node name="Depth" type="Label" parent="Control/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 45
+text = "DEPTH: 0"
